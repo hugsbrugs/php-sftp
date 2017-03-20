@@ -1,0 +1,18 @@
+{
+    "name": "hugsbrugs/php-sftp",
+    "description": "PHP SFTP Utilities",
+    "authors": [
+        {
+            "name": "Hugo Maugey",
+            "email": "hugo@maugey.fr",
+            "homepage": "https://hugo.maugey.fr",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "phpseclib/phpseclib": "~2.0"
+    },
+    "autoload":{
+        "psr-4": {"Hug\\": "src/Hug/"}
+    },
+}
