@@ -4,7 +4,7 @@ PHP SFTP Utilities
 
 ## Dependencies :
 
-[phpseclib](https://github.com/phpseclib/phpseclib) : [Documentation](https://api.phpseclib.org/master/) - [Examples](http://phpseclib.sourceforge.net/sftp/examples.html)
+phpseclib : [Github](https://github.com/phpseclib/phpseclib) - [Documentation](https://api.phpseclib.org/master/) - [Examples](http://phpseclib.sourceforge.net/sftp/examples.html)
 
 ## Install
 
@@ -23,68 +23,68 @@ use Hug\Sftp\Sftp as Sftp;
 
 Test SFTP connection
 ```php
-Sftp::test($server, $user, $password, $port);
+Sftp::test($server, $user, $password, $port = 22);
 ```
 
 Check if a file exists on SFTP Server
 ```php
-Sftp::is_file($server, $user, $password, $remote_file, $port);
+Sftp::is_file($server, $user, $password, $remote_file, $port = 22);
 ```
 
 Delete a file on remote FTP server
 ```php
-Sftp::delete($server, $user, $password, $remote_file, $port);
+Sftp::delete($server, $user, $password, $remote_file, $port = 22);
 ```
 
 Recursively deletes files and folder in given directory
 ```php
-Sftp::rmdir($server, $user, $password, $remote_path, $port);
+Sftp::rmdir($server, $user, $password, $remote_path, $port = 22);
 ```
 
 Recursively copy files and folders on remote SFTP server
 ```php
-Sftp::upload_dir($server, $user, $password, $local_path, $remote_path, $port);
+Sftp::upload_dir($server, $user, $password, $local_path, $remote_path, $port = 22);
 ```
 
 Download a file from remote SFTP server
 ```php
-Sftp::download($server, $user, $password, $remote_file, $local_file, $port);
+Sftp::download($server, $user, $password, $remote_file, $local_file, $port = 22);
 ```
 
 Download a directory from remote FTP server
 ```php
 Sftp::download_dir($server, $user, $password, $remote_dir, $local_dir, 
-$port);
+$port = 22);
 ```
 
 Rename a file on remote SFTP server
 ```php
-Sftp::rename($server, $user, $password, $old_file, $new_file, $port);
+Sftp::rename($server, $user, $password, $old_file, $new_file, $port = 22);
 ```
 
 Create a directory on remote SFTP server
 ```php
-Sftp::mkdir($server, $user, $password, $directory, $port);
+Sftp::mkdir($server, $user, $password, $directory, $port = 22);
 ```
 
 Create a file on remote SFTP server
 ```php
-Sftp::touch($server, $user, $password, $remote_file, $content, $port);
+Sftp::touch($server, $user, $password, $remote_file, $content, $port = 22);
 ```
 
 Upload a file on SFTP server
 ```php
-Sftp::upload($server, $user, $password, $local_file, $remote_file = '', $port);
+Sftp::upload($server, $user, $password, $local_file, $remote_file = '', $port = 22);
 ```
 
 List files on SFTP server
 ```php
-Sftp::scandir($server, $user, $password, $path, $port);
+Sftp::scandir($server, $user, $password, $path, $port = 22);
 ```
 
 Get default login SFTP directory aka pwd
 ```php
-Sftp::pwd($server, $user, $password, $port);
+Sftp::pwd($server, $user, $password, $port = 22);
 ```
 
 ## To Do
