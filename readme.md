@@ -36,29 +36,26 @@ Delete a file on remote FTP server
 Sftp::delete($server, $user, $password, $remote_file, $port = 22);
 ```
 
-Recursively deletes files and folder in given directory
+Recursively deletes files and folder in given directory (If remote_path ends with a slash delete folder content otherwise delete folder itself)
 ```php
 Sftp::rmdir($server, $user, $password, $remote_path, $port = 22);
 ```
-If remote_path ends with a slash delete folder content otherwise delete folder itself
 
-Recursively copy files and folders on remote SFTP server
+Recursively copy files and folders on remote SFTP server (If local_path ends with a slash upload folder content otherwise upload folder itself)
 ```php
 Sftp::upload_dir($server, $user, $password, $local_path, $remote_path, $port = 22);
 ```
-If local_path ends with a slash upload folder content otherwise upload folder itself
 
 Download a file from remote SFTP server
 ```php
 Sftp::download($server, $user, $password, $remote_file, $local_file, $port = 22);
 ```
 
-Download a directory from remote FTP server
+Download a directory from remote FTP server (If remote_dir ends with a slash download folder content otherwise download folder itself)
 ```php
 Sftp::download_dir($server, $user, $password, $remote_dir, $local_dir, 
 $port = 22);
 ```
-If remote_dir ends with a slash download folder content otherwise download folder itself
 
 Rename a file on remote SFTP server
 ```php
