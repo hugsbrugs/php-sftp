@@ -4,9 +4,45 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ed83af0fa051799d2e17ab737123f6d8",
-    "content-hash": "66bf22fa821281aab13a8260763eea9c",
+    "hash": "abc913abef324c7ebdb5eb49de35f970",
+    "content-hash": "3a250a00426348024622278e718607c9",
     "packages": [
+        {
+            "name": "hugsbrugs/php-string",
+            "version": "0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hugsbrugs/php-string.git",
+                "reference": "df8316987b212934bb287f29cb01d59a6e5c6ed0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hugsbrugs/php-string/zipball/df8316987b212934bb287f29cb01d59a6e5c6ed0",
+                "reference": "df8316987b212934bb287f29cb01d59a6e5c6ed0",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.0",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Hug\\": "src/Hug/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Hugo Maugey",
+                    "email": "hugo@maugey.fr",
+                    "homepage": "https://hugo.maugey.fr",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP String Utilities",
+            "time": "2017-03-15 21:07:58"
+        },
         {
             "name": "phpseclib/phpseclib",
             "version": "2.0.4",

@@ -40,11 +40,13 @@ Recursively deletes files and folder in given directory
 ```php
 Sftp::rmdir($server, $user, $password, $remote_path, $port = 22);
 ```
+If remote_path ends with a slash delete folder content otherwise delete folder itself
 
 Recursively copy files and folders on remote SFTP server
 ```php
 Sftp::upload_dir($server, $user, $password, $local_path, $remote_path, $port = 22);
 ```
+If local_path ends with a slash upload folder content otherwise upload folder itself
 
 Download a file from remote SFTP server
 ```php
@@ -56,6 +58,7 @@ Download a directory from remote FTP server
 Sftp::download_dir($server, $user, $password, $remote_dir, $local_dir, 
 $port = 22);
 ```
+If remote_dir ends with a slash download folder content otherwise download folder itself
 
 Rename a file on remote SFTP server
 ```php
