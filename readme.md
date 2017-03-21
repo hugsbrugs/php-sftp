@@ -2,6 +2,8 @@
 
 PHP SFTP Utilities
 
+If you also need FTP : [php-ftp](https://github.com/hugsbrugs/php-ftp)
+
 ## Dependencies :
 
 phpseclib : [Github](https://github.com/phpseclib/phpseclib) - [Documentation](https://api.phpseclib.org/master/) - [Examples](http://phpseclib.sourceforge.net/sftp/examples.html)
@@ -85,6 +87,13 @@ Sftp::scandir($server, $user, $password, $path, $port = 22);
 Get default login SFTP directory aka pwd
 ```php
 Sftp::pwd($server, $user, $password, $port = 22);
+```
+
+## Tests
+
+Edit example/test.php with your FTP parameters then run 
+```php
+php example/test.php
 ```
 
 ## To Do

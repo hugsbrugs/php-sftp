@@ -4,12 +4,12 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "abc913abef324c7ebdb5eb49de35f970",
-    "content-hash": "3a250a00426348024622278e718607c9",
+    "hash": "c60d305a710ecbc84f0d16b3c98325a5",
+    "content-hash": "016e9e0c5b0a1dcab07745d144f9ede6",
     "packages": [
         {
             "name": "hugsbrugs/php-string",
-            "version": "0.1",
+            "version": "1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hugsbrugs/php-string.git",

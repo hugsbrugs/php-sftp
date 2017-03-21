@@ -291,7 +291,7 @@ class Sftp
 	 * @param string $local_dir
 	 * @param string $remote_dir
 	 *
-	 * @return bool $copy
+	 * @return bool $uploaded_all
 	 *
 	 */
 	private static function upload_all($sftp, $local_dir, $remote_dir)
@@ -347,7 +347,7 @@ class Sftp
 
 	        if($to_upload===$uploaded)
 	        {
-				$uploaded_all = true;	        	
+				$uploaded_all = true;
 	        }
 	    }
 	    catch(Exception $e)
@@ -420,7 +420,7 @@ class Sftp
             {
                 if(false !== $sftp = Sftp::login($server, $user, $password, $port))
 				{
-					# If local_path do not ends with /
+					# If remote_dir do not ends with /
 			    	if(!HString::ends_with($remote_dir, '/'))
 			    	{
 				 		# Create fisrt level directory on local filesystem
@@ -461,6 +461,7 @@ class Sftp
     private static function download_all($sftp, $remote_dir, $local_dir)
     {
     	$download_all = false;
+    	
         try
         {
             if($sftp->is_dir($remote_dir))
