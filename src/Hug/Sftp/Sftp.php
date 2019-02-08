@@ -2,8 +2,9 @@
 
 namespace Hug\Sftp;
 
-use phpseclib\Net\SFTP as SecFtp;
+use Exception;
 use Hug\HString\HString as HString;
+use phpseclib\Net\SFTP as SecFtp;
 
 /**
  *
