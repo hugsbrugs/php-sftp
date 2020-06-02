@@ -112,8 +112,15 @@ var_dump($test);
 
 # Create Folder
 $directory = $FtpPath . '/coucou';
-$test = Sftp::mkdir($FtpServer, $FtpUser, $FtpPass, $directory, $FtpPort);
+$mode = 0755;
+$test = Sftp::mkdir($FtpServer, $FtpUser, $FtpPass, $directory, $mode, $FtpPort);
 echo "mkdir";
+var_dump($test);
+
+
+$mode = 0644;
+$test = Sftp::chmod($FtpServer, $FtpUser, $FtpPass, $directory, $mode, $FtpPort);
+echo "chmod";
 var_dump($test);
 
 # Rename Folder
