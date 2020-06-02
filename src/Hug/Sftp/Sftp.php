@@ -572,7 +572,7 @@ class Sftp
      * @return bool $created
      *
      */
-	public static function mkdir($server, $user, $password, $directory, $mode = 0755, $port = 22)
+	public static function mkdir($server, $user, $password, $directory, $port = 22, $mode = 0755)
 	{
 	    $created = false;
 
@@ -607,7 +607,7 @@ class Sftp
      * @return bool $created
      *
      */
-    public static function chmod($server, $user, $password, $filename, $mode = 0644, $port = 22)
+    public static function chmod($server, $user, $password, $filename, $port = 22, $mode = 0644)
     {
         $ok = false;
 
