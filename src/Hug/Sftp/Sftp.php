@@ -566,12 +566,13 @@ class Sftp
      * @param string $user
      * @param string $password
      * @param string $directory
+     * @param int $mode
      * @param int $port
      *
      * @return bool $created
      *
      */
-	public static function mkdir($server, $user, $password, $directory, $port = 22)
+	public static function mkdir($server, $user, $password, $directory, $port = 22, $mode = 0755)
 	{
 	    $created = false;
 
@@ -579,7 +580,7 @@ class Sftp
 	    {
 	    	if(false !== $sftp = Sftp::login($server, $user, $password, $port))
 			{
-				if($sftp->mkdir($directory, true))
+				if($sftp->mkdir($directory, $mode))
 				{
 	                $created = true;
 				}
@@ -592,6 +593,42 @@ class Sftp
 
 	    return $created;
 	}
+
+    /**
+     * Change a directory or file mode attribute on remote SFTP server
+     *
+     * @param string $server 
+     * @param string $user
+     * @param string $password
+     * @param string $filename
+     * @param int $mode
+     * @param int $port
+     *
+     * @return bool $created
+     *
+     */
+    public static function chmod($server, $user, $password, $filename, $port = 22, $mode = 0644)
+    {
+        $ok = false;
+
+        try
+        {
+            if(false !== $sftp = Sftp::login($server, $user, $password, $port))
+            {
+                if($sftp->chmod($filename, $mode))
+                {
+                    $ok = true;
+                }
+            }
+        }
+        catch(Exception $e)
+        {
+            error_log("Sftp::chmod : " . $e->getMessage());
+        }
+
+        return $ok;
+    }
+
 
 	/**
      * Create and fill in a file on remote SFTP server
