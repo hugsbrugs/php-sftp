@@ -113,13 +113,13 @@ var_dump($test);
 # Create Folder
 $directory = $FtpPath . '/coucou';
 $mode = 0755;
-$test = Sftp::mkdir($FtpServer, $FtpUser, $FtpPass, $directory, $mode, $FtpPort);
+$test = Sftp::mkdir($FtpServer, $FtpUser, $FtpPass, $directory, $FtpPort, $mode);
 echo "mkdir";
 var_dump($test);
 
 
 $mode = 0644;
-$test = Sftp::chmod($FtpServer, $FtpUser, $FtpPass, $directory, $mode, $FtpPort);
+$test = Sftp::chmod($FtpServer, $FtpUser, $FtpPass, $directory, $FtpPort, $mode);
 echo "chmod";
 var_dump($test);
 
