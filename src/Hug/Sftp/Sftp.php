@@ -11,6 +11,15 @@ use phpseclib\Net\SFTP as SecFtp;
  */
 class Sftp
 {
+    /**
+     * @const int port
+     */
+    const port = 22;
+
+    /**
+     * @const int timeout
+     */
+    const timeout = 10;
 
 	/**
      * Login to SFTP server
@@ -19,17 +28,18 @@ class Sftp
      * @param string $user
      * @param string $password
      * @param int $port
+     * @param int $timeout
      *
      * @return resource $sftp
      *
      */
-    private static function login($server, $user, $password, $port = 22)
+    private static function login($server, $user, $password, $port = self::port, $timeout = self::timeout)
     {
         $sftp = false;
         
         try
         {
-        	$sftp = new SecFtp($server, $port);
+        	$sftp = new SecFtp($server, $port, $timeout);
 			if(!$sftp->login($user, $password))
 			{
 				$sftp = false;
@@ -49,15 +59,17 @@ class Sftp
      * @param string $server 
      * @param string $user
      * @param string $password
+     * @param int $port
+     * @param int $timeout
      *
      * @return bool $test
      *
      */
-    public static function test($server, $user, $password, $port = 22)
+    public static function test($server, $user, $password, $port = self::port, $timeout = self::timeout)
     {
         $test = false;
 
-    	if(false !== $sftp = Sftp::login($server, $user, $password, $port))
+    	if(false !== $sftp = Sftp::login($server, $user, $password, $port, $timeout))
 		{
             $test = true;
         }
@@ -72,16 +84,17 @@ class Sftp
 	 * @param string $user
 	 * @param string $password
 	 * @param string $remote_file
-	 * @param int $port
+     * @param int $port
+     * @param int $timeout
 	 *
 	 * @return bool $is_file
 	 */
-	public static function is_file($server, $user, $password, $remote_file, $port = 22)
+	public static function is_file($server, $user, $password, $remote_file, $port = self::port, $timeout = self::timeout)
 	{
 	    $is_file = false;
 	    try
 	    {
-			if(false !== $sftp = Sftp::login($server, $user, $password, $port))
+            if(false !== $sftp = Sftp::login($server, $user, $password, $port, $timeout))
 			{
 				if($sftp->is_file($remote_file))
 				{
@@ -105,17 +118,18 @@ class Sftp
      * @param string $password
      * @param string $remote_file
      * @param int $port
+     * @param int $timeout
      *
      * @return bool $deleted
      *
      */
-    public static function delete($server, $user, $password, $remote_file, $port = 22)
+    public static function delete($server, $user, $password, $remote_file, $port = self::port, $timeout = self::timeout)
     {
         $deleted = false;
 
         try
         {
-            if(false !== $sftp = Sftp::login($server, $user, $password, $port))
+            if(false !== $sftp = Sftp::login($server, $user, $password, $port, $timeout))
 			{
                 if($sftp->is_file($remote_file))
                 {
@@ -145,17 +159,18 @@ class Sftp
      * @param string $password
      * @param string $remote_path
      * @param int $port
+     * @param int $timeout
      *
      * @return bool $deleted
      *
      */
-    public static function rmdir($server, $user, $password, $remote_path, $port = 22)
+    public static function rmdir($server, $user, $password, $remote_path, $port = self::port, $timeout = self::timeout)
     {
         $deleted = false;
 
         try
         {
-            if(false !== $sftp = Sftp::login($server, $user, $password, $port))
+            if(false !== $sftp = Sftp::login($server, $user, $password, $port, $timeout))
 			{
                 # Delete directory content
                 if(Sftp::clean_dir($remote_path, $sftp))
@@ -247,12 +262,13 @@ class Sftp
 	 * @param string $password
 	 * @param string $local_path
 	 * @param string $remote_path
-	 * @param int $port
+     * @param int $port
+     * @param int $timeout
 	 *
 	 * @return bool $uploaded
 	 *
 	 */
-	public static function upload_dir($server, $user, $password, $local_path, $remote_path, $port = 22)
+	public static function upload_dir($server, $user, $password, $local_path, $remote_path, $port = self::port, $timeout = self::timeout)
 	{
 	    $uploaded = false;
 
@@ -260,8 +276,8 @@ class Sftp
 	    {
 	    	# Remove trailing slash
 	 		$remote_path = rtrim($remote_path, DIRECTORY_SEPARATOR);
-	 		
-	    	if(false !== $sftp = Sftp::login($server, $user, $password, $port))
+
+            if(false !== $sftp = Sftp::login($server, $user, $password, $port, $timeout))
 			{
 				# If local_path do not ends with /
 		    	if(!HString::ends_with($local_path, '/'))
@@ -368,17 +384,18 @@ class Sftp
      * @param string $remote_file
      * @param string $local_file
      * @param int $port
+     * @param int $timeout
      *
      * @return bool $downloaded
      *
      */
-    public static function download($server, $user, $password, $remote_file, $local_file, $port = 22)
+    public static function download($server, $user, $password, $remote_file, $local_file, $port = self::port, $timeout = self::timeout)
     {
         $downloaded = false;
 
         try
         {
-        	if(false !== $sftp = Sftp::login($server, $user, $password, $port))
+        	if(false !== $sftp = Sftp::login($server, $user, $password, $port, $timeout))
 			{
                 # Download File
                 if($sftp->get($remote_file, $local_file))
@@ -407,11 +424,12 @@ class Sftp
      * @param string $remote_dir
      * @param string $local_dir
      * @param int $port
+     * @param int $timeout
      *
      * @return bool $downloaded
      *
      */
-    public static function download_dir($server, $user, $password, $remote_dir, $local_dir, $port = 22)
+    public static function download_dir($server, $user, $password, $remote_dir, $local_dir, $port = self::port, $timeout = self::timeout)
     {
         $downloaded = false;
 
@@ -419,7 +437,7 @@ class Sftp
         {
             if(is_dir($local_dir) && is_writable($local_dir))
             {
-                if(false !== $sftp = Sftp::login($server, $user, $password, $port))
+                if(false !== $sftp = Sftp::login($server, $user, $password, $port, $timeout))
 				{
 					# If remote_dir do not ends with /
 			    	if(!HString::ends_with($remote_dir, '/'))
@@ -533,17 +551,18 @@ class Sftp
      * @param string $current_filename
      * @param string $new_filename
      * @param int $port
+     * @param int $timeout
      *
      * @return bool $renamed
      *
      */
-	public static function rename($server, $user, $password, $current_filename, $new_filename, $port = 22)
+	public static function rename($server, $user, $password, $current_filename, $new_filename, $port = self::port, $timeout = self::timeout)
 	{
 	    $renamed = false;
 
 	    try
 	    {
-	    	if(false !== $sftp = Sftp::login($server, $user, $password, $port))
+	    	if(false !== $sftp = Sftp::login($server, $user, $password, $port, $timeout))
 			{
 				if($sftp->rename($current_filename, $new_filename))
 				{
@@ -567,17 +586,18 @@ class Sftp
      * @param string $password
      * @param string $directory
      * @param int $port
+     * @param int $timeout
      *
      * @return bool $created
      *
      */
-	public static function mkdir($server, $user, $password, $directory, $port = 22)
+	public static function mkdir($server, $user, $password, $directory, $port = self::port, $timeout = self::timeout)
 	{
 	    $created = false;
 
 	    try
 	    {
-	    	if(false !== $sftp = Sftp::login($server, $user, $password, $port))
+	    	if(false !== $sftp = Sftp::login($server, $user, $password, $port, $timeout))
 			{
 				if($sftp->mkdir($directory, true))
 				{
@@ -601,17 +621,18 @@ class Sftp
      * @param string $password
      * @param string $remote_file
      * @param int $port
+     * @param int $timeout
      *
      * @return bool $content
      *
      */
-    public static function touch($server, $user, $password, $remote_file, $content = '', $port = 22)
+    public static function touch($server, $user, $password, $remote_file, $content = '', $port = self::port, $timeout = self::timeout)
     {
         $created = false;
 
         try
         {
-            if(false !== $sftp = Sftp::login($server, $user, $password, $port))
+            if(false !== $sftp = Sftp::login($server, $user, $password, $port, $timeout))
 			{
                 # Create temp file
                 $local_file = tmpfile();
@@ -640,18 +661,19 @@ class Sftp
 	 * @param string $password
 	 * @param string $local_file
 	 * @param string $remote_file
-	 * @param int $port
+     * @param int $port
+     * @param int $timeout
 	 *
 	 * @return bool $uploaded
 	 *
 	 */
-	public static function upload($server, $user, $password, $local_file, $remote_file, $port = 22)
+	public static function upload($server, $user, $password, $local_file, $remote_file, $port = self::port, $timeout = self::timeout)
 	{
 	    $uploaded = false;
 	    
 	    try
 	    {
-	    	if(false !== $sftp = Sftp::login($server, $user, $password, $port))
+	    	if(false !== $sftp = Sftp::login($server, $user, $password, $port, $timeout))
 			{
 				if($sftp->put($remote_file, $local_file, SecFtp::SOURCE_LOCAL_FILE))
 				{
@@ -675,15 +697,16 @@ class Sftp
      * @param string $password
      * @param string $path
      * @param int $port
+     * @param int $timeout
      *
      * @return array $files Files listed in directory or false
      *
      */
-    public static function scandir($server, $user, $password, $path, $port = 22)
+    public static function scandir($server, $user, $password, $path, $port = self::port, $timeout = self::timeout)
     {
         $files = false;
 
-        if(false !== $sftp = Sftp::login($server, $user, $password, $port))
+        if(false !== $sftp = Sftp::login($server, $user, $password, $port, $timeout))
 		{
             $files = $sftp->nlist($path);
         }
@@ -703,15 +726,16 @@ class Sftp
      * @param string $user
      * @param string $password
      * @param int $port
+     * @param int $timeout
      *
      * @return string $dir Print Working Directory or false
      *
      */
-    public static function pwd($server, $user, $password, $port = 22)
+    public static function pwd($server, $user, $password, $port = self::port, $timeout = self::timeout)
     {
         $dir = false;
 
-        if(false !== $sftp = Sftp::login($server, $user, $password, $port))
+        if(false !== $sftp = Sftp::login($server, $user, $password, $port, $timeout))
 		{
             $dir = $sftp->pwd();
         } 
